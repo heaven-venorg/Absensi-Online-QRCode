@@ -24,7 +24,7 @@ class AbsencesController extends Controller
         $absensiToday = Absences::where('name', $user->name)->whereDate('absensi_time', $today)->first();
         if ($absensiToday) {
             return redirect()->route('root')->with('alert', 'Anda sudah melakukan absensi');
-        } elseif (Carbon::now()->hour >= 7) {
+        } elseif (Carbon::now()->hour >= 8) {
             return redirect()->route('root')->with('alert', 'Anda Terlambat, dan tidak bisa absensi');
         } elseif (Carbon::now()->hour >= 12 && Carbon::now()->dayOfWeek === 2) {
             return redirect()->route('root')->with('alert', 'Anda Terlambat, dan tidak bisa absensi');
