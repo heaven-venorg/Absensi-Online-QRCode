@@ -17,7 +17,7 @@ class AuthController extends Controller
 
     public function loginaction(Request $request)
     {
-        $user = $request->only('email', 'password');
+        $user = $request->only('email', 'password', $request->remember);
         if (Auth::attempt($user)) {
             $request->session()->regenerate();
             return redirect()->route('root');

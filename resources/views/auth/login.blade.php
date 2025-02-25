@@ -12,6 +12,11 @@
             @csrf
             <input type="text" name="email" class="form-control" placeholder="Masukan email anda">
             <input type="password" name="password" class="form-control" placeholder="Masukan password anda">
+            <div class="group d-flex gap-2">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                    {{ old('remember') ? 'checked' : '' }}>
+                <label class="form-check-label" for="remember">Remember Me</label>
+            </div>
             <input type="submit" class="btn btn-outline-danger" value="Login">
         </form>
     </div>
