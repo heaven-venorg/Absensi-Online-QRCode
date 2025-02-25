@@ -25,7 +25,7 @@ class AbsencesController extends Controller
         if ($absensiToday) {
             return redirect()->route('root')->with('alert', 'Anda sudah melakukan absensi');
         } elseif (Carbon::now()->hour >= 06) {
-            return redirect()->route('root')->with('alert', 'Anda Terlambat');
+            return redirect()->route('root')->with('alert', 'Anda Terlambat, dan tidak bisa absensi');
         } else {
             Absences::create([
                 'user_id' => $user->id,
