@@ -13,7 +13,7 @@ class AbsencesController extends Controller
     //
     public function absencesView()
     {
-        $qrcode = QrCode::size(250)->generate(route('absences.record'));
+        $qrcode = QrCode::size(150)->generate(route('absences.record'));
         return view('page.absences.index', compact('qrcode'));
     }
 

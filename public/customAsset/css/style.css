@@ -1,0 +1,18 @@
+/* Card Totality in Admin.User */
+
+.card-custom {
+    border-left-width: 4px;
+}
+.icon-custom {
+    opacity: 0.2;
+    font-size: 2rem;
+}
+.card-blue {
+    border-left-color: #4e73df;
+}
+.card-green {
+    border-left-color: #1cc88a;
+}
+.card-red {
+    border-left-color: #e74a3b;
+}

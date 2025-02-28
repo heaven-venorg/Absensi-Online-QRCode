@@ -11,56 +11,71 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->get();
-        return view('');
+        return view('page.root.index', compact('users'));
     }
 
-    // To action Create View
-    public function create(){
-        return view('');
-    };
-
-    // To action create
-    public function store(Request $request)
+    public function dashboard()
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password')
-        ]);
-    };
-
-    // To action edit
-    public function edit(){
-        return view('');
-    };
-
-    // To action update
-    public function update(Request $request, string $id){
-        $user = User::findOrFail($id);
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required'
-        ]);
-
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-            'role' => $request->input('role')
-        ]);
+        return view('admin.home');
     }
 
-    // To delete user
-    public function destroy(string $id){
-        $user = User::findOrFail($id);
-        $user->delete();
+    public function userManagement()
+    {
+        $users = User::all();
+        $lengthUser = User::count();
+        $lengthUserAdmin = User::where('role', 'admin')->count();
+        $lengthUserUser = User::where('role', 'user')->count();
+        return view('admin.user', compact('users', 'lengthUser', 'lengthUserAdmin', 'lengthUserUser'));
     }
+
+
+    // // To action Create View
+    // public function create(){
+    //     return view('');
+    // };
+
+    // // To action create
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+
+    //     User::create([
+    //         'name' => $request->input('name'),
+    //         'email' => $request->input('email'),
+    //         'password' => $request->input('password')
+    //     ]);
+    // };
+
+    // // To action edit
+    // public function edit(){
+    //     return view('');
+    // };
+
+    // // To action update
+    // public function update(Request $request, string $id){
+    //     $user = User::findOrFail($id);
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //         'role' => 'required'
+    //     ]);
+
+    //     $user->update([
+    //         'name' => $request->input('name'),
+    //         'email' => $request->input('email'),
+    //         'password' => $request->input('password'),
+    //         'role' => $request->input('role')
+    //     ]);
+    // }
+
+    // // To delete user
+    // public function destroy(string $id){
+    //     $user = User::findOrFail($id);
+    //     $user->delete();
+    // }
 }
