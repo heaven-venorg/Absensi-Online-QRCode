@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenceManagement;
 use App\Http\Controllers\AbsencesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -21,7 +22,8 @@ Route::middleware('auth')->group(function () {
         // To Dashboard
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [UserController::class, 'dashboard'])->name('admin.view');
-            Route::get('/user', [UserController::class, 'userManagement'])->name('admin.user');
+            Route::get('/user', [UserController::class, 'userManagement'])->name('admin.user.view');
+            Route::get('/absencemanagement', [AbsenceManagement::class, 'managementView'])->name('admin.absence.view');
         });
     });
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
