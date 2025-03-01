@@ -11,11 +11,14 @@ Route::middleware('auth')->group(function () {
     // In Root
     Route::prefix('/')->group(function () {
         Route::get('/', [ViewController::class, 'index'])->name('root');
-        Route::get('/absences', [AbsencesController::class, 'absencesView'])->name('absences.view');
-        Route::post('/absences', [AbsencesController::class, 'recordAbsences'])->name('absences.record');
+        Route::get('/scan', [ViewController::class, 'scanqr'])->name('scanqr');
+        Route::get('/absences', [AbsencesController::class, 'recordAbsences'])->name('absences.record');
     });
 
     Route::middleware(RoleMiddleware::class)->group(function () {
+        // To QRCode Absense
+        Route::get('/absencesqrcode', [AbsencesController::class, 'absencesView'])->name('absences.view');
+        // To Dashboard
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [UserController::class, 'dashboard'])->name('admin.view');
             Route::get('/user', [UserController::class, 'userManagement'])->name('admin.user');

@@ -11,4 +11,9 @@ class ViewController extends Controller
     {
         return view('page.root.index');
     }
+
+    public function scanqr()
+    {
+        return view('page.root.scanqrcode');
+    }
 }
