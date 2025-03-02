@@ -4,9 +4,10 @@
     <link rel="stylesheet" href="{{ asset('customAsset/css/style.css') }}">
     {{-- End --}}
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Absences</h1>
+        <h1 class="mt-4">Detailed Absensi</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Absences DataTable</li>
+            <li class="breadcrumb-item active">Absences Detail Milik <span class="text-capitalize">{{ $user->name }}</span>
+            </li>
         </ol>
         <div class="container">
             <div class="row">
@@ -17,7 +18,11 @@
                                 <p class="text-primary mb-1" style="font-size: 0.875rem; font-weight: 600;">ABSENCES
                                     (TODAY)</p>
                                 <p class="text-dark mb-0" style="font-size: 1.5rem; font-weight: 700;">
-                                    {{ $absencesTodayAll }}
+                                    @if ($absensiToday)
+                                        Sudah Absen
+                                    @else
+                                        Belum Absen
+                                    @endif
                                 </p>
                             </div>
                             <div>
@@ -33,7 +38,8 @@
                                 <p class="text-success mb-1" style="font-size: 0.875rem; font-weight: 600;">ABSENCES
                                     (ALL)</p>
                                 <p class="text-dark mb-0" style="font-size: 1.5rem; font-weight: 700;">
-                                    {{ $absencesAll }}</p>
+                                    {{ $absensiAll }}
+                                </p>
                             </div>
                             <div>
                                 <i class="bi bi-person-bounding-box icon-custom text-success"></i>
@@ -69,30 +75,20 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Name</th>
-                            <th>Absensi Status</th>
-                            <th>Detailed</th>
+                            <th>Absensi Time</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        @foreach ($absensiDetail as $absensi)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $user->name }}</td>
-                                @if ($absencesToday->contains('name', $user->name))
-                                    <td><span class="badge bg-success">Sudah Absen</span< /td>
-                                        @else
-                                    <td><span class="badge bg-danger">Belum Absen</span< /td>
-                                @endif
-                                <td><a href="{{ route('admin.detail.view', $user->id) }}"
-                                        class="badge bg-warning text-black text-decoration-none">Detailed</a></td>
+                                <td>{{ $absensi->absensi_time }}</td>
+                                <td>
+                                    <div class="badge bg-success">Absensi Berhasil</div>
+                                </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3">Tidak ada data</td>
-                            </tr>
-                        @endforelse
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>

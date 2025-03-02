@@ -20,4 +20,15 @@ class AbsenceManagement extends Controller
 
         return view('admin.absence', compact('users', 'absences', 'absencesToday', 'absencesAll', 'absencesTodayAll'));
     }
+
+
+    public function detailedUser(int $id)
+    {
+        $today = Carbon::today();
+        $user = User::findOrFail($id);
+        $absensiToday = Absences::whereDate('absensi_time', $today)->where('user_id', $id)->first();
+        $absensiDetail = Absences::where('user_id', $id)->latest()->get();
+        $absensiAll = Absences::where('user_id', $id)->count();
+        return view('admin.detailedUser', compact('user', 'absensiDetail', 'absensiToday', 'absensiAll'));
+    }
 }

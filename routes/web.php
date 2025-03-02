@@ -23,7 +23,10 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [UserController::class, 'dashboard'])->name('admin.view');
             Route::get('/user', [UserController::class, 'userManagement'])->name('admin.user.view');
-            Route::get('/absencemanagement', [AbsenceManagement::class, 'managementView'])->name('admin.absence.view');
+            Route::prefix('/absencemanagement')->group(function () {
+                Route::get('/', [AbsenceManagement::class, 'managementView'])->name('admin.absence.view');
+                Route::get('/detail/user/{id}', [AbsenceManagement::class, 'detailedUser'])->name('admin.detail.view');
+            });
         });
     });
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
