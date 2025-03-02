@@ -52,8 +52,8 @@ Absensi Online QRCode adalah aplikasi web yang memanfaatkan teknologi QR Code un
    php artisan db:seed
    ```
 
-```bash
-php artisan db:seed --class=SeederRole
+    ```bash
+   php artisan db:seed --class=SeederRole
    ```
 
 8. **Jalankan Aplikasi**:
