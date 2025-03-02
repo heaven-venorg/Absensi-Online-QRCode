@@ -9,7 +9,6 @@ class SeederRole extends Seeder
 {
     public function run()
     {
-        echo "Menjalankan Seeder Role\n";
         Role::create(
             [
                 'role' => 'admin',
@@ -19,7 +18,5 @@ class SeederRole extends Seeder
         Role::create([
             'role' => 'user'
         ]);
-
-        echo "Menjalankan Seeder Role Berhasil";
     }
 }
