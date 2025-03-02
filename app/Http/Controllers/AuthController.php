@@ -17,14 +17,18 @@ class AuthController extends Controller
 
     public function loginaction(Request $request)
     {
-        $user = $request->only('email', 'password', $request->remember);
-        if (Auth::attempt($user)) {
+        $remember = $request->input('remember') === 'on' ? true : false;
+        $user = $request->only('email', 'password');
+
+        if (Auth::attempt($user, $remember)) {
             $request->session()->regenerate();
             return redirect()->route('root');
         } else {
             return redirect()->route('login')->with('gagal', 'Email atau password yang anda masukan salah');
         }
     }
+
+
 
     public function logout()
     {

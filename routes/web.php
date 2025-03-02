@@ -22,7 +22,10 @@ Route::middleware('auth')->group(function () {
         // To Dashboard
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [UserController::class, 'dashboard'])->name('admin.view');
-            Route::get('/user', [UserController::class, 'userManagement'])->name('admin.user.view');
+            Route::prefix('/user')->group(function () {
+                Route::get('/', [UserController::class, 'userManagement'])->name('admin.user.view');
+                Route::post('/create', [UserController::class, 'store'])->name('admin.user.store');
+            });
             Route::prefix('/absencemanagement')->group(function () {
                 Route::get('/', [AbsenceManagement::class, 'managementView'])->name('admin.absence.view');
                 Route::get('/detail/user/{id}', [AbsenceManagement::class, 'detailedUser'])->name('admin.detail.view');

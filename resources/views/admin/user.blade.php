@@ -3,6 +3,20 @@
     {{-- Custom Style --}}
     <link rel="stylesheet" href="{{ asset('customAsset/css/style.css') }}">
     {{-- End --}}
+
+    {{-- Alert  --}}
+    @if (session('alert'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="autoCloseAlert">
+            {{ session('alert') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    {{-- Script --}}
+    <script src="{{ asset('customAsset/js/script.js') }}"></script>
+    {{-- End Script --}}
+
+    {{-- End Alert --}}
     <div class="container-fluid px-4">
         <h1 class="mt-4">Users</h1>
         <ol class="breadcrumb mb-4">
@@ -58,9 +72,15 @@
             </div>
         </div>
         <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                User DataTable
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="group">
+                    <i class="fas fa-table me-1"></i>
+                    User DataTable
+                </div>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#createUserModal">
+                    Tambah User
+                </button>
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -90,6 +110,29 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        {{-- Modal To Create User --}}
+        <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createUserModalLabel">Tambahkan User Baru</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="createUserForm" class="d-flex flex-column gap-3" action="{{ route('admin.user.store') }}"
+                            method="POST">
+                            @csrf
+                            <input type="text" class="form-control" placeholder="Masukan Nama User" name="name">
+                            <input type="email" class="form-control" placeholder="Masukan Email User" name="email">
+                            <input type="password" class="form-control" placeholder="Masukan Password" name="password">
+                            <button type="submit" class="btn btn-primary w-100">Tambahkan User</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     @endsection

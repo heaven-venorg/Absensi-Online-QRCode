@@ -34,21 +34,23 @@ class UserController extends Controller
     //     return view('');
     // };
 
-    // // To action create
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'email' => 'required|email',
-    //         'password' => 'required',
-    //     ]);
+    // To action create
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    //     User::create([
-    //         'name' => $request->input('name'),
-    //         'email' => $request->input('email'),
-    //         'password' => $request->input('password')
-    //     ]);
-    // };
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        ]);
+
+        return redirect()->route('admin.user.view')->with('alert', 'User Sukses Ditambahkan');
+    }
 
     // // To action edit
     // public function edit(){

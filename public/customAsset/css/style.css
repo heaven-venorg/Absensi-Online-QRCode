@@ -16,3 +16,11 @@
 .card-red {
     border-left-color: #e74a3b;
 }
+
+/* To alert modal */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+}
